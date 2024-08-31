@@ -43,10 +43,14 @@
                             <option value="gpt-4">gpt-4</option>
                         </select>
                     </div>
+                    <!-- New checkbox for searching only reviews -->
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" id="onlyReviewsCheckbox" checked> Only look for Reviews</label>
+                    </div>
                     <!-- Custom Prompt Text Area -->
                     <div class="input-group">
                         <label for="customPrompt">Custom Prompt:</label>
-                        <textarea id="customPrompt" rows="6"></textarea> <!-- Adjust rows to fit the prompt -->
+                        <textarea id="customPrompt" rows="8"></textarea>
                         <button type="button" id="resetPromptButton">Reset to Default</button>
                     </div>
                 </div>

@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const ncbiCheckbox = document.getElementById("ncbiCheckbox");
     const crossRefCheckbox = document.getElementById("crossRefCheckbox");
     const arxivCheckbox = document.getElementById("arxivCheckbox");
+    const onlyReviewsCheckbox = document.getElementById("onlyReviewsCheckbox"); // New checkbox for reviews
     const gptEngineSelect = document.getElementById("gptEngine");
     const customPromptTextarea = document.getElementById("customPrompt");
     const resetPromptButton = document.getElementById("resetPromptButton");
@@ -37,6 +38,7 @@ Start with a general overview of what is happening in the field in no more than 
     ncbiCheckbox.checked = JSON.parse(localStorage.getItem("ncbiCheckbox")) !== false;
     crossRefCheckbox.checked = JSON.parse(localStorage.getItem("crossRefCheckbox")) !== false;
     arxivCheckbox.checked = JSON.parse(localStorage.getItem("arxivCheckbox")) !== false;
+    onlyReviewsCheckbox.checked = JSON.parse(localStorage.getItem("onlyReviewsCheckbox")) !== false; // Load review checkbox state
     gptEngineSelect.value = localStorage.getItem("gptEngine") || "gpt-4o-mini";
     customPromptTextarea.value = localStorage.getItem("customPrompt") || defaultPrompt;
 
@@ -63,6 +65,10 @@ Start with a general overview of what is happening in the field in no more than 
 
     arxivCheckbox.addEventListener("change", function () {
         localStorage.setItem("arxivCheckbox", arxivCheckbox.checked);
+    });
+
+    onlyReviewsCheckbox.addEventListener("change", function () {
+        localStorage.setItem("onlyReviewsCheckbox", onlyReviewsCheckbox.checked);
     });
 
     gptEngineSelect.addEventListener("change", function () {
@@ -224,10 +230,11 @@ Start with a general overview of what is happening in the field in no more than 
 
     function fetchNCBI(topic, days) {
         updateButton("Fetching from NCBI...");
+        const onlyReviews = onlyReviewsCheckbox.checked ? "AND review[Publication Type]" : ""; // Include review filter if checkbox is checked
         const esearchUrl = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi";
         const esearchParams = new URLSearchParams({
             db: "pubmed",
-            term: `${topic}[Title/Abstract] AND review[Publication Type]`,
+            term: `${topic}[Title/Abstract] ${onlyReviews}`,
             datetype: "edat",
             reldate: days,
             retmax: "100",
