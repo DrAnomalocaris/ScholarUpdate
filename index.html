@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Summary Tool</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Research Summary Tool</h1>
+        <form id="searchForm">
+            <div class="input-group">
+                <label for="apiKey">OpenAI API Key:</label>
+                <input type="password" id="apiKey" required>
+            </div>
+            <div class="input-group">
+                <label for="topic">Research Topic:</label>
+                <input type="text" id="topic" required>
+            </div>
+            <div class="input-group">
+                <label for="days">Look Back (Days):</label>
+                <input type="number" id="days" value="30" required>
+            </div>
+            <button type="button" id="searchButton">Search</button>
+
+            <!-- Expandable Settings -->
+            <div class="expandable-settings">
+                <button type="button" id="settingsButton">Settings &#9660;</button>
+                <div class="settings-content">
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" id="ncbiCheckbox" checked> NCBI</label>
+                        <label><input type="checkbox" id="crossRefCheckbox" checked> CrossRef</label>
+                        <label><input type="checkbox" id="arxivCheckbox" checked> arXiv</label>
+                    </div>
+                    <div class="input-group">
+                        <label for="gptEngine">GPT Engine:</label>
+                        <select id="gptEngine">
+                            <option value="gpt-4o-mini" selected>gpt-4o-mini</option>
+                            <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
+                            <option value="gpt-4">gpt-4</option>
+                        </select>
+                    </div>
+                    <!-- Custom Prompt Text Area -->
+                    <div class="input-group">
+                        <label for="customPrompt">Custom Prompt:</label>
+                        <textarea id="customPrompt" rows="6"></textarea> <!-- Adjust rows to fit the prompt -->
+                        <button type="button" id="resetPromptButton">Reset to Default</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div id="results"></div>
+    </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <a href="https://github.com/DrAnomalocaris" target="_blank" class="footer-link">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="http://linkedin.com/in/dr-albert-lahat-85b30578" target="_blank" class="footer-link">
+                <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+            <a href="http://www.drlahat.com" target="_blank" class="footer-link">
+                <i class="fas fa-globe"></i> Website
+            </a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
